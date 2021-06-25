@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
-import { HomeComponent } from './home/home.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { GameComponent } from './game/game.component';
 import { LoginComponent } from './login/login.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
 
@@ -30,7 +30,7 @@ import { FaqComponent } from './faq/faq.component';
     HighscoreComponent,
     ProfileComponent,
     FaqComponent,
-    HomeComponent
+    GameComponent,
   ],
   imports: [
     ReactiveFormsModule,
