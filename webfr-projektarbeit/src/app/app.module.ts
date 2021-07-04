@@ -22,6 +22,8 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { HighscoreComponent } from './highscore/highscore.component';
 import { ProfileComponent } from './profile/profile.component';
 import { FaqComponent } from './faq/faq.component';
+import { NavbarComponent } from './navbar/navbar.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -32,6 +34,7 @@ import { FaqComponent } from './faq/faq.component';
     ProfileComponent,
     FaqComponent,
     GameComponent,
+    NavbarComponent,
   ],
   imports: [
     ReactiveFormsModule,
@@ -46,7 +49,8 @@ import { FaqComponent } from './faq/faq.component';
     MatIconModule,
     MatInputModule,
     MatProgressSpinnerModule,
-    MatToolbarModule
+    MatToolbarModule,
+    NgbModule
   ],
   providers: [],
   bootstrap: [AppComponent]
