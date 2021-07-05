@@ -22,6 +22,7 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { HighscoreComponent } from './highscore/highscore.component';
 import { ProfileComponent } from './profile/profile.component';
 import { FaqComponent } from './faq/faq.component';
+import {MatTableModule} from '@angular/material/table';
 import { NavbarComponent } from './navbar/navbar.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
@@ -50,7 +51,9 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     MatInputModule,
     MatProgressSpinnerModule,
     MatToolbarModule,
+    MatTableModule
     NgbModule
+
   ],
   providers: [],
   bootstrap: [AppComponent]
