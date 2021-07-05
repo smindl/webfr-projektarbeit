@@ -6,6 +6,8 @@ import { FaqComponent } from './faq/faq.component';
 import { HighscoreComponent } from './highscore/highscore.component';
 import { ProfileComponent } from './profile/profile.component';
 import { GameComponent } from './game/game.component';
+//import { NavbarComponent } from './navbar/navbar.component';
+
 
 
 const routes: Routes = [

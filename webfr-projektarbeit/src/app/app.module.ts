@@ -23,6 +23,8 @@ import { HighscoreComponent } from './highscore/highscore.component';
 import { ProfileComponent } from './profile/profile.component';
 import { FaqComponent } from './faq/faq.component';
 import {MatTableModule} from '@angular/material/table';
+import { NavbarComponent } from './navbar/navbar.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -33,6 +35,7 @@ import {MatTableModule} from '@angular/material/table';
     ProfileComponent,
     FaqComponent,
     GameComponent,
+    NavbarComponent,
   ],
   imports: [
     ReactiveFormsModule,
@@ -49,6 +52,8 @@ import {MatTableModule} from '@angular/material/table';
     MatProgressSpinnerModule,
     MatToolbarModule,
     MatTableModule
+    NgbModule
+
   ],
   providers: [],
   bootstrap: [AppComponent]
