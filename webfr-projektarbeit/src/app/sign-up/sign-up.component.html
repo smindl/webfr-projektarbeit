@@ -1,1 +1,98 @@
-<p>sign-up goes here!</p>
+<div class="signUpForm">
+    <form [formGroup]="checkoutForm" (ngSubmit)="onSubmit()">
+      <mat-form-field class="form-input" appearance="fill">
+        <mat-label>E-mail</mat-label>
+        <input
+          matInput
+          placeholder="pat@example.com"
+          
+          [formControl]="email"
+          required
+        />
+        <mat-error *ngIf="email.invalid">{{ getErrorMessage() }}</mat-error>
+      </mat-form-field>
+      <br />
+      <mat-form-field class="form-input" appearance="fill">
+        <mat-label>Passwort</mat-label>
+        <input
+          
+          required
+          minlength="8"
+          matInput
+          [type]="hide ? 'password' : 'text'"
+          formControlName="pw"
+        />
+        <button
+          type = "button"
+          mat-icon-button
+          matSuffix
+          (click)="hide = !hide"
+          [attr.aria-label]="'Hide password'"
+          [attr.aria-pressed]="hide"
+        >
+          <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
+        </button>
+      </mat-form-field>
+      <br />
+      <mat-form-field class="form-input" appearance="fill">
+        <mat-label>Passwort wiederholen</mat-label>
+        <input
+          required
+          minlength="8"
+          matInput
+          [type]="hide ? 'password' : 'text'"
+          formControlName="pwwh"
+        />
+        <button
+          mat-icon-button
+          matSuffix
+          type = "button"
+          (click)="hide = !hide"
+          [attr.aria-label]="'Hide password'"
+          [attr.aria-pressed]="hide"
+        >
+          <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
+        </button>
+      </mat-form-field>
+      <br />
+  
+      <mat-form-field class="form-input" appearance="fill">
+        <mat-label>Firma</mat-label>
+        <input value="FH Technikum" readonly matInput formControlName="firma" />
+      </mat-form-field>
+      <br />
+  
+      <mat-form-field class="form-input" appearance="fill">
+        <mat-label>Straße</mat-label>
+        <input type="text" matInput formControlName="street" />
+      </mat-form-field>
+      <br />
+  
+      <mat-form-field class="form-input" appearance="fill">
+        <mat-label>Stadt</mat-label>
+        <input type="text" matInput formControlName="city" />
+      </mat-form-field>
+      <br />
+  
+      <mat-form-field class="form-input" appearance="fill">
+        <mat-label>PLZ</mat-label>
+        <input matInput pattern="[0-9]{4}" type="text" formControlName="PLZ" />
+      </mat-form-field>
+      <br />
+  
+      <mat-form-field class="form-input" appearance="fill">
+        <mat-label>Adresse</mat-label>
+        <textarea matInput formControlName="address"></textarea>
+      </mat-form-field>
+      <br /> 
+      <button type="submit" [disabled]="checkoutForm.invalid || email.invalid"  mat-raised-button color="primary">
+        Sign up
+      </button>
+      <br />
+    </form>
+  
+    <button href="#" routerLink="/login" mat-button color="primary">
+      Login
+    </button>
+  </div>
+  
