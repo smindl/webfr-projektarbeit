@@ -24,6 +24,8 @@ import { ProfileComponent } from './profile/profile.component';
 import { FaqComponent } from './faq/faq.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import {MatGridListModule} from '@angular/material/grid-list';
+
 
 @NgModule({
   declarations: [
@@ -50,7 +52,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     MatInputModule,
     MatProgressSpinnerModule,
     MatToolbarModule,
-    NgbModule
+    NgbModule,
+    MatGridListModule
   ],
   providers: [],
   bootstrap: [AppComponent]
