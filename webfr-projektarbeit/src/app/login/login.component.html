@@ -1,1 +1,49 @@
-<p>login goes here!</p>
+<div class="loginForm">
+    <form  (ngSubmit)="onSubmit()">
+    <mat-form-field appearance="fill" class="form-input">
+      <mat-label>E-mail</mat-label>
+      <input
+        matInput
+        placeholder="example@example.com"
+        [formControl]="email"
+        required
+        
+      />
+      <mat-error *ngIf="email.invalid">{{ getErrorMessage() }}</mat-error>
+    </mat-form-field>
+    <br />
+    <mat-form-field appearance="fill" class="form-input">
+      <mat-label>Enter your password</mat-label>
+      <input
+        required
+        matInput
+        [type]="hide ? 'password' : 'text'"
+        
+        [formControl]="pw"
+      />
+  
+      <button
+        type = "button"
+        mat-icon-button
+        matSuffix
+        (click)="hide = !hide"
+        [attr.aria-label]="'Hide password'"
+        [attr.aria-pressed]="hide"
+      >
+        <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
+      </button>
+      <mat-error *ngIf="pw.invalid">{{ getErrorMessagepw() }}</mat-error>
+    </mat-form-field>
+    <br />
+    <br />
+  
+    <button type="submit" [disabled]="pw.invalid || email.invalid" mat-raised-button color="primary">
+      Login
+    </button>
+    <br />
+    <button href="#" routerLink="/sign-up" mat-button color="primary">
+      Sign Up
+    </button>
+  </form>
+  </div>
+  

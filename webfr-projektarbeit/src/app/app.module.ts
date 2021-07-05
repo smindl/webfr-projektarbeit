@@ -51,7 +51,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     MatInputModule,
     MatProgressSpinnerModule,
     MatToolbarModule,
-    MatTableModule
+    MatTableModule,
     NgbModule
 
   ],
