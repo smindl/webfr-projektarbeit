@@ -65,7 +65,7 @@ export class GameComponent implements OnInit {
     ul.setAttribute("class", "mdc-image-list puzzle-grid");
     puzzle!.appendChild(ul);
 
-    for (let i = 0; i < 9; i++){
+    for (let i = 0; i < this.imageArray.length; i++){
       const li = document.createElement("li");
       li.setAttribute("class", "mdc-image-list__item");
       const div = document.createElement("div");
@@ -120,7 +120,7 @@ export class GameComponent implements OnInit {
   }
 
   checkWin() : void {
-    for (let i = 0; i < 9; i++) {
+    for (let i = 0; i < this.imageArray.length; i++) {
       if (this.imageArray[i] != i+1)
         return;
     }
