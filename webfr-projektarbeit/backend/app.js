@@ -158,4 +158,24 @@ app.post('/signup',async function (req, res, next) {
 
 });
 
+app.post('/login',async function (req, res, next) {
+    
+    loginData = await UserData.find({email : req.body.email, password : req.body.password})
+
+    let confirm = false
+    
+    if (loginData.length > 0) {
+       
+        res.status(201).json({
+            confirm : true
+        });
+    }
+    else {
+        res.status(200).json({
+            confirm : false
+        });
+    }
+
+});
+
 module.exports = app;

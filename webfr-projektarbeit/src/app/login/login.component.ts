@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {FormControl, Validators} from '@angular/forms';
+import { HttpClient, HttpHeaders} from '@angular/common/http';
 
 @Component({
   selector: 'app-login',
@@ -8,7 +9,11 @@ import {FormControl, Validators} from '@angular/forms';
 })
 export class LoginComponent implements OnInit {
 
-  constructor() { }
+  httpOptions = {
+    headers : new HttpHeaders({ 'Content-Type':'application/json'})
+  };
+
+  constructor(private http: HttpClient) { }
 
   ngOnInit(): void {
     
@@ -39,18 +44,30 @@ export class LoginComponent implements OnInit {
 
   onSubmit(){  
    
-    let username ="test@test.at";
-    let pword = "12345678";
- 
+    let user = {
+      email : this.email.value,
+      password : this.pw.value
+    }
 
-    if(this.email.value  == username && pword == this.pw.value){
-      alert("Login erfolgreich!");
-      console.log("login successful");
-    }
-    else{
-      alert("Login fehlgeschlagen!");
-      console.log("login failed");
-    }
+    this.http.post<{ confirm: boolean}>("http://localhost:3000/login",user, this.httpOptions).subscribe({
+      next: (responseData) => {
+  
+        console.log(responseData.confirm)
+        //response Data.confirm is true upon successfull login, false otherwise
+        //code after successfull login is still missing
+
+        if(responseData.confirm) {
+          alert("Login successfull!")
+        }
+        else {
+          alert("Email or password incorrect")
+        }
+
+      },
+      error: (err) => {
+        // do something with the error
+      },
+    });
 
   }
 
