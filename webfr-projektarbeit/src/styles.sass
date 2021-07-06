@@ -1,7 +1,12 @@
-/* You can add global styles to this file, and also import other style files */
+
+    /* You can add global styles to this file, and also import other style files */
 
 /* Importing Bootstrap SCSS file. */
 //@import '~bootstrap/scss/bootstrap'
+@use '@material/image-list/mdc-image-list'
+@use '@material/image-list'
 
-
-
+.puzzle-grid 
+    width: 35%
+    padding-top: 50px
+    @include image-list.standard-columns(3)

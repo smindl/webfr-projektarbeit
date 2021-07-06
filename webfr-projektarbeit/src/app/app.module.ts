@@ -25,6 +25,8 @@ import { FaqComponent } from './faq/faq.component';
 import {MatTableModule} from '@angular/material/table';
 import { NavbarComponent } from './navbar/navbar.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import {MatGridListModule} from '@angular/material/grid-list';
+
 
 @NgModule({
   declarations: [
@@ -51,9 +53,9 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     MatInputModule,
     MatProgressSpinnerModule,
     MatToolbarModule,
+    NgbModule,
+    MatGridListModule,
     MatTableModule,
-    NgbModule
-
   ],
   providers: [],
   bootstrap: [AppComponent]
