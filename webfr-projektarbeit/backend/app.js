@@ -96,6 +96,33 @@ app.get('/highscore',async function (req, res, next) {
 
 });
 
+app.post('/profile',async function (req, res, next) {
+    
+    profileData = await UserData.find({username : req.body.username})
+    
+    if (profileData.length > 0) {
+        data = {
+            email : profileData[0].email,
+            username: profileData[0].username,
+            highscore : profileData[0].highscore,
+            company : profileData[0].company,
+            street : profileData[0].street,
+            city : profileData[0].city,
+            postcode : profileData[0].postcode
+        }
+
+        res.status(200).json({
+            data : data
+        });
+    }
+    else {
+        res.status(404).json({
+            message : "User not found"
+        });
+    }
+
+});
+
 app.post('/signup',async function (req, res, next) {
     
     usercheckMail = await UserData.find({email : req.body.email})
@@ -107,7 +134,6 @@ app.post('/signup',async function (req, res, next) {
         });
     }
     else if(usercheckName.length > 0) {
-        console.log("Test2")
         res.status(200).json({
             message: "Username already in use"
         });

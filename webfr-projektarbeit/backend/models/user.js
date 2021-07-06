@@ -6,10 +6,10 @@ const UserData = mongoose.Schema({
     password : String,
     highscore : {type : Number, default : 0},
     
-    company : String,
-    street : String,
-    city : String,
-    postcode : Number
+    company : {type : String, default : "unbekannt"} ,
+    street : {type : String, default : "unbekannt"},
+    city : {type : String, default : "unbekannt"},
+    postcode : {type : Number, default : 0000}
     
 
 
