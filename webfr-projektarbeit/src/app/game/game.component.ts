@@ -1,4 +1,5 @@
 import { Component, OnInit} from '@angular/core';
+import { HttpClient, HttpHeaders} from '@angular/common/http';
 
 @Component({
   selector: 'app-game',
@@ -13,8 +14,13 @@ export class GameComponent implements OnInit {
   seconds : string;
   timerInterval : any;
   chosenPuzzle : string;
+  
 
-  constructor() {
+  httpOptions = {
+    headers : new HttpHeaders({ 'Content-Type':'application/json'})
+  };
+
+  constructor(private http: HttpClient) {
     this.imageArray = this.shufflePuzzleParts();
     this.selectedImages = [-1, -1];
   }
@@ -124,9 +130,38 @@ export class GameComponent implements OnInit {
       if (this.imageArray[i] != i+1)
         return;
     }
+
+    //set variables for http request
+    //always logged in with hardcode
+    let login = true
+    let http = this.http
+    var self = this
+    let httpOptions = this.httpOptions
+
     clearInterval(this.timerInterval);
     setTimeout(function () {
-      alert('win');
+      alert("win");
+      if(login) {
+
+        //setup data for request
+        //hardcoded user should be from login(session?) when finished
+        let data = {
+        username : "test0r1",
+        seconds : self.seconds,
+        mins : self.minutes
+        }
+
+        self.http.post<{ message: String}>("http://localhost:3000/updatehighscore",data, self.httpOptions).subscribe({
+        next: (responseData) => {
+    
+          console.log(responseData.message)
+
+        },
+        error: (err) => {
+          // do something with the error
+        },
+      });
+    }
     }, 500);
   }
 
