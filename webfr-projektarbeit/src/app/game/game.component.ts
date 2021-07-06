@@ -114,6 +114,7 @@ export class GameComponent implements OnInit {
   }
 
   timer() : void {
+    let timerText = document.getElementById("timer");
     let minutes = 0;
     let seconds = 0;
     this.timerInterval = setInterval(() => {
@@ -125,6 +126,7 @@ export class GameComponent implements OnInit {
       }
       this.minutes = ("0" + minutes).slice(-2);
       this.seconds = ("0" + seconds).slice(-2);
+      timerText!.textContent = this.minutes + ":" + this.seconds;
     }, 1000)
   }
 
