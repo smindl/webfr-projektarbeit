@@ -1,33 +1,38 @@
-<h2>My Profile</h2>
+<div class="container-fluid profile">
+    <h2>My Profile</h2>
+    <mat-card>
+        
 
-<!--Plain Test HTML to check values from DB-->
-<table>
-    <tr>
-        <td>Email:</td>
-        <td>{{profileData.email}}</td>
-    </tr>
-    <tr>
-        <td>Username:</td>
-        <td>{{profileData.username}}</td>
-    </tr>
-    <tr>
-        <td>Company:</td>
-        <td>{{profileData.company}}</td>
-    </tr>
-    <tr>
-        <td>City:</td>
-        <td>{{profileData.city}}</td>
-    </tr>
-    <tr>
-        <td>Street:</td>
-        <td>{{profileData.street}}</td>
-    </tr>
-    <tr>
-        <td>Postcode:</td>
-        <td>{{profileData.postcode}}</td>
-    </tr>
-    <tr>
-        <td>Highscore:</td>
-        <td>{{profileData.highscore}}</td>
-    </tr>
-</table>
+<!--not so Plain anymore Test HTML to check values from DB-->
+
+        <mat-card-title class ="title">Email</mat-card-title>
+        <mat-card-subtitle>{{profileData.email}} </mat-card-subtitle>
+
+    
+        <mat-card-title class ="title">Username</mat-card-title>
+        <mat-card-subtitle>{{profileData.username}}</mat-card-subtitle>
+    
+    
+        <mat-card-title class ="title">Company</mat-card-title>
+        <mat-card-subtitle>{{profileData.company}}</mat-card-subtitle>
+    
+    
+        <mat-card-title class ="title">City</mat-card-title>
+        <mat-card-subtitle>{{profileData.city}}</mat-card-subtitle>
+    
+    
+        <mat-card-title class ="title">Street</mat-card-title>
+        <mat-card-subtitle>{{profileData.street}}</mat-card-subtitle>
+    
+    
+        <mat-card-title class ="title">Postcode</mat-card-title>
+        <mat-card-subtitle>{{profileData.postcode}}</mat-card-subtitle>
+    
+    
+        <mat-card-title class ="title">Highscore</mat-card-title>
+        <mat-card-subtitle>{{profileData.highscore}}</mat-card-subtitle>
+    
+
+</mat-card>
+
+</div>
