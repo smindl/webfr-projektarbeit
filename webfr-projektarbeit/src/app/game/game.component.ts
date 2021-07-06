@@ -21,7 +21,6 @@ export class GameComponent implements OnInit {
   };
 
   constructor(private http: HttpClient) {
-    this.imageArray = this.shufflePuzzleParts();
     this.selectedImages = [-1, -1];
   }
 
@@ -29,22 +28,36 @@ export class GameComponent implements OnInit {
     this.choosePuzzle();
   }
 
+  startPuzzle() : void {
+    this.imageArray = this.shufflePuzzleParts();
+    this.placeImages();
+    this.timer();
+  }
+
   choosePuzzle() : void {
+    let that = this;
+
     let puzzle1 = document.getElementById("puzzle1");
     puzzle1!.textContent = "PUZZLE 1";
-    let that = this;
     puzzle1?.addEventListener("click", function() {
       that.chosenPuzzle = "puzzle1";
-      that.placeImages();
-      that.timer();
+      that.startPuzzle();
     });
+    let img1 = document.createElement("img");
+    img1.setAttribute("id", "img1");
+    img1.setAttribute("src", "assets/img/puzzle1.png");
+    puzzle1?.appendChild(img1);
+
     let puzzle2 = document.getElementById("puzzle2");
     puzzle2!.textContent = "PUZZLE 2";
     puzzle2?.addEventListener("click", function() {
       that.chosenPuzzle = "puzzle2";
-      that.placeImages();
-      that.timer();
+      that.startPuzzle();
     });
+    let img2 = document.createElement("img");
+    img2.setAttribute("id", "img2");
+    img2.setAttribute("src", "assets/img/puzzle2.png");
+    puzzle2?.appendChild(img2);
   }
 
   shufflePuzzleParts() : number[] {
@@ -62,6 +75,8 @@ export class GameComponent implements OnInit {
 
   placeImages() : void {
     const puzzle = document.getElementById("puzzle");
+    document.getElementById("img1")?.remove();
+    document.getElementById("img2")?.remove();
     
     if (puzzle?.firstChild){
       puzzle.removeChild(puzzle.firstChild);
@@ -82,7 +97,7 @@ export class GameComponent implements OnInit {
       img.setAttribute("src", imgSrc);
       img.setAttribute("id", String(this.imageArray[i]));
       img.setAttribute("pos", String(i));
-      var that = this; //ugly as hell
+      let that = this; //ugly as hell
       img.addEventListener("click", function() {
         img.setAttribute("style", "border-style:solid;");
         that.select(i);
@@ -91,20 +106,6 @@ export class GameComponent implements OnInit {
       li.appendChild(div);
       ul.appendChild(li);
     }
-
-    /*let html = "<mat-grid-list cols='3' rowHeight='3:1'>";
-  
-    for (let i = 0; i < 9; i++){
-      console.log(i);
-      html += "<mat-grid-tile> <img onclick='select("
-      + i+1 + ")' pos='" 
-      + String(imageArray[i]) + "' id = '"
-      + String(i+1) + "' src='assets/puzzle1_imgs/img"
-      + String(imageArray[i]) + ".jpg'> </mat-grid-tile>"
-    }
-    html += "</mat-grid-list>";*/
-
-    //$("#puzzle").html(html);
   }
 
   select(i: number) : void  {
