@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators, FormBuilder } from '@angular/forms';
+import { HttpClient, HttpHeaders} from '@angular/common/http';
 
 @Component({
   selector: 'app-sign-up',
@@ -8,17 +9,21 @@ import { FormControl, Validators, FormBuilder } from '@angular/forms';
 })
 export class SignUpComponent implements OnInit {
 
-  constructor(private formBuilder: FormBuilder) {}
+  constructor(private formBuilder: FormBuilder, private http: HttpClient) {}
 
   checkoutForm = this.formBuilder.group({
+    username : ['', Validators.required],
     pw: ['', Validators.required],
     pwwh: ['', Validators.required],
     street: '',
     city: '',
     firma: 'FH Technikum Wien',
     PLZ: ['', Validators.pattern('[0-9]{4}')],
-    address: '',
   });
+
+  httpOptions = {
+    headers : new HttpHeaders({ 'Content-Type':'application/json'})
+  };
 
   ngOnInit(): void {}
 
@@ -42,7 +47,26 @@ export class SignUpComponent implements OnInit {
     }  
 
     if(this.checkoutForm.valid && this.email.valid){
-      alert('Registrierung erfolgreich!');
+      let data = {
+        email : this.email.value,
+        username : this.checkoutForm.controls['username'].value,
+        password : this.checkoutForm.controls['pw'].value,
+        street : this.checkoutForm.controls['street'].value,
+        city : this.checkoutForm.controls['city'].value,
+        company : this.checkoutForm.controls['firma'].value,
+        postcode : this.checkoutForm.controls['PLZ'].value
+      }
+
+      this.http.post<{ message: string}>("http://localhost:3000/signup", data, this.httpOptions).subscribe({
+        next: (responseData) => {
+          console.log(responseData.message)
+          alert(responseData.message);
+        },
+        error: (err) => {
+          console.log(err)
+        },
+      });
+      
     }
    
   }

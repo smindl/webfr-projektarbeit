@@ -5,6 +5,7 @@ const mongoose = require("mongoose");
 
 const UserData = require("./models/user");
 const TestData = require("./models/test");
+const user = require("./models/user");
 
 mongoose.connect("mongodb+srv://Admin:WebFrameworks@webframeworksdb.uur4x.mongodb.net/WebFrameworksDB?retryWrites=true&w=majority")
     .then(() => {
@@ -28,9 +29,8 @@ app.use(urlencoded({
 app.post('/test', function (req, res, next) {
     
     const userData = new UserData({
-        username : "Testuser 3",
+        username : "Testuser 5",
         password : "test1234",
-        highscore : 90,
         company : "FHTW",
         street : "Teststreet",
         city : "Testcity",
@@ -93,6 +93,42 @@ app.get('/highscore',async function (req, res, next) {
         data : data
     });
 
+
+});
+
+app.post('/signup',async function (req, res, next) {
+    
+    usercheckMail = await UserData.find({email : req.body.email})
+    usercheckName = await UserData.find({username : req.body.username})
+
+    if(usercheckMail.length > 0) {
+        res.status(200).json({
+            message: "Email already in use"
+        });
+    }
+    else if(usercheckName.length > 0) {
+        console.log("Test2")
+        res.status(200).json({
+            message: "Username already in use"
+        });
+    }
+    else {
+        const userData = new UserData({
+            email : req.body.email,
+            username :  req.body.username,
+            password :  req.body.password,
+            company :  req.body.company,
+            street :  req.body.street,
+            city :  req.body.city,
+            postcode :  req.body.postcode
+        });
+        userData.save();
+        console.log("Data saved")
+
+        res.status(201).json({
+            message: "New User " + userData.username
+        });
+    }
 
 });
 

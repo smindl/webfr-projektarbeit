@@ -12,6 +12,13 @@
         <mat-error *ngIf="email.invalid">{{ getErrorMessage() }}</mat-error>
       </mat-form-field>
       <br />
+
+      <mat-form-field class="form-input" appearance="fill">
+        <mat-label>Username</mat-label>
+        <input required type="text" matInput formControlName="username" />
+      </mat-form-field>
+      <br />
+
       <mat-form-field class="form-input" appearance="fill">
         <mat-label>Passwort</mat-label>
         <input
@@ -79,12 +86,7 @@
         <input matInput pattern="[0-9]{4}" type="text" formControlName="PLZ" />
       </mat-form-field>
       <br />
-  
-      <mat-form-field class="form-input" appearance="fill">
-        <mat-label>Adresse</mat-label>
-        <textarea matInput formControlName="address"></textarea>
-      </mat-form-field>
-      <br /> 
+
       <button type="submit" [disabled]="checkoutForm.invalid || email.invalid"  mat-raised-button color="primary">
         Sign up
       </button>

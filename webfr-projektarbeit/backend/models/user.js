@@ -1,9 +1,10 @@
 const mongoose = require("mongoose");
 
 const UserData = mongoose.Schema({
+    email : String,
     username : String,
     password : String,
-    highscore : Number,
+    highscore : {type : Number, default : 0},
     
     company : String,
     street : String,
