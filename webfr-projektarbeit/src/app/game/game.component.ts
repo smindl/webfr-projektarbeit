@@ -1,3 +1,4 @@
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { Component, OnInit} from '@angular/core';
 
 @Component({
@@ -6,14 +7,21 @@ import { Component, OnInit} from '@angular/core';
   styleUrls: ['./game.component.sass']
 })
 export class GameComponent implements OnInit {
+  
+  imageArray : number[];
+  selectedImages : number[];
 
-  constructor() { }
+  constructor() {
+    this.imageArray = this.shufflePuzzleParts();
+    this.selectedImages = [-1, -1];
+    console.log(this.imageArray);
+  }
 
   ngOnInit(): void {
     this.placeImages();
   }
 
-  shufflePuzzleParts() {
+  shufflePuzzleParts() : number[] {
     const puzzleParts = [1, 2, 3, 4, 5, 6, 7, 8, 9];
     let counter = puzzleParts.length;
     while (counter > 0) {
@@ -26,10 +34,13 @@ export class GameComponent implements OnInit {
     return puzzleParts;
   }
 
-  placeImages() {
-    let imageArray = this.shufflePuzzleParts();
-
+  placeImages() : void {
     const puzzle = document.getElementById("puzzle");
+    
+    if (puzzle?.firstChild){
+      puzzle.removeChild(puzzle.firstChild);
+    }
+
     const ul = document.createElement("ul");
     ul.setAttribute("class", "mdc-image-list puzzle-grid");
     puzzle!.appendChild(ul);
@@ -39,12 +50,17 @@ export class GameComponent implements OnInit {
       li.setAttribute("class", "mdc-image-list__item");
       const div = document.createElement("div");
       div.setAttribute("class", "mdc-image-list__image-aspect-container");
-      const imgSrc = "assets/puzzle1_imgs/img" + imageArray[i] + ".jpg";
+      const imgSrc = "assets/puzzle1_imgs/img" + this.imageArray[i] + ".jpg";
       const img = document.createElement("img");
       img.setAttribute("class", "mdc-image-list__image");
       img.setAttribute("src", imgSrc);
-      img.setAttribute("id", String(i+1));
-      img.setAttribute("pos", String(imageArray[i]));
+      img.setAttribute("id", String(this.imageArray[i]));
+      img.setAttribute("pos", String(i));
+      var that = this; //ugly as hell
+      img.addEventListener("click", function() {
+        img.setAttribute("style", "border-style:solid;");
+        that.select(i);
+      });
       div.appendChild(img);
       li.appendChild(div);
       ul.appendChild(li);
@@ -63,6 +79,34 @@ export class GameComponent implements OnInit {
     html += "</mat-grid-list>";*/
 
     //$("#puzzle").html(html);
+  }
+
+  select(i: number) : void  {
+    if (this.selectedImages[0] == -1)
+      this.selectedImages[0] = i;
+    else if (this.selectedImages[1] == -1){
+      this.selectedImages[1] = i;
+      this.swapPictures();
+    }
+  }
+
+  swapPictures() : void {
+    let tmp = this.imageArray[this.selectedImages[0]];
+    this.imageArray[this.selectedImages[0]] = this.imageArray[this.selectedImages[1]];
+    this.imageArray[this.selectedImages[1]] = tmp;
+    this.selectedImages[0] = this.selectedImages[1] = -1;
+    this.placeImages();
+    this.checkWin();
+  }
+
+  checkWin() : void {
+    for (let i = 0; i < 9; i++) {
+      if (this.imageArray[i] != i+1)
+        return;
+    }
+    setTimeout(function () {
+      alert('win');
+    }, 500);
   }
 
 }

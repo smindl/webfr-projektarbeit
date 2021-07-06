@@ -55,7 +55,7 @@ import {MatGridListModule} from '@angular/material/grid-list';
     MatToolbarModule,
     NgbModule,
     MatGridListModule,
-    MatTableModule,
+    MatTableModule
   ],
   providers: [],
   bootstrap: [AppComponent]
