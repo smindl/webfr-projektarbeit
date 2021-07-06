@@ -22,6 +22,7 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { HighscoreComponent } from './highscore/highscore.component';
 import { ProfileComponent } from './profile/profile.component';
 import { FaqComponent } from './faq/faq.component';
+import {MatTableModule} from '@angular/material/table';
 import { NavbarComponent } from './navbar/navbar.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {MatGridListModule} from '@angular/material/grid-list';
@@ -53,7 +54,8 @@ import {MatGridListModule} from '@angular/material/grid-list';
     MatProgressSpinnerModule,
     MatToolbarModule,
     NgbModule,
-    MatGridListModule
+    MatGridListModule,
+    MatTableModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
