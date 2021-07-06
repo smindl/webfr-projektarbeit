@@ -26,7 +26,7 @@ import {MatTableModule} from '@angular/material/table';
 import { NavbarComponent } from './navbar/navbar.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {MatGridListModule} from '@angular/material/grid-list';
-
+import {MatExpansionModule} from '@angular/material/expansion'; 
 
 @NgModule({
   declarations: [
@@ -56,6 +56,7 @@ import {MatGridListModule} from '@angular/material/grid-list';
     NgbModule,
     MatGridListModule,
     MatTableModule,
+    MatExpansionModule
   ],
   providers: [],
   bootstrap: [AppComponent]
