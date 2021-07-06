@@ -1,5 +1,4 @@
 import { Component, OnInit} from '@angular/core';
-import { discardPeriodicTasks } from '@angular/core/testing';
 
 @Component({
   selector: 'app-game',
@@ -33,7 +32,6 @@ export class GameComponent implements OnInit {
     const puzzle = document.getElementById("puzzle");
     const ul = document.createElement("ul");
     ul.setAttribute("class", "mdc-image-list puzzle-grid");
-    //ul.setAttribute("style", "mdc-image-list puzzle-grid");
     puzzle!.appendChild(ul);
 
     for (let i = 0; i < 9; i++){
