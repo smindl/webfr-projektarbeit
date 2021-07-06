@@ -1,4 +1,3 @@
-import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { Component, OnInit} from '@angular/core';
 
 @Component({
@@ -13,6 +12,7 @@ export class GameComponent implements OnInit {
   minutes : string;
   seconds : string;
   timerInterval : any;
+  chosenPuzzle : string;
 
   constructor() {
     this.imageArray = this.shufflePuzzleParts();
@@ -20,8 +20,25 @@ export class GameComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.placeImages();
-    this.timer();
+    this.choosePuzzle();
+  }
+
+  choosePuzzle() : void {
+    let puzzle1 = document.getElementById("puzzle1");
+    puzzle1!.textContent = "PUZZLE 1";
+    let that = this;
+    puzzle1?.addEventListener("click", function() {
+      that.chosenPuzzle = "puzzle1";
+      that.placeImages();
+      that.timer();
+    });
+    let puzzle2 = document.getElementById("puzzle2");
+    puzzle2!.textContent = "PUZZLE 2";
+    puzzle2?.addEventListener("click", function() {
+      that.chosenPuzzle = "puzzle2";
+      that.placeImages();
+      that.timer();
+    });
   }
 
   shufflePuzzleParts() : number[] {
@@ -53,7 +70,7 @@ export class GameComponent implements OnInit {
       li.setAttribute("class", "mdc-image-list__item");
       const div = document.createElement("div");
       div.setAttribute("class", "mdc-image-list__image-aspect-container");
-      const imgSrc = "assets/puzzle1_imgs/img" + this.imageArray[i] + ".jpg";
+      const imgSrc = "assets/" + this.chosenPuzzle + "_imgs/img" + this.imageArray[i] + ".jpg";
       const img = document.createElement("img");
       img.setAttribute("class", "mdc-image-list__image");
       img.setAttribute("src", imgSrc);
@@ -114,6 +131,7 @@ export class GameComponent implements OnInit {
   }
 
   timer() : void {
+    clearInterval(this.timerInterval);
     let timerText = document.getElementById("timer");
     let minutes = 0;
     let seconds = 0;
