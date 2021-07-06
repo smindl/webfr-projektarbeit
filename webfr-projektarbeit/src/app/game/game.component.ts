@@ -10,15 +10,18 @@ export class GameComponent implements OnInit {
   
   imageArray : number[];
   selectedImages : number[];
+  minutes : string;
+  seconds : string;
+  timerInterval : any;
 
   constructor() {
     this.imageArray = this.shufflePuzzleParts();
     this.selectedImages = [-1, -1];
-    console.log(this.imageArray);
   }
 
   ngOnInit(): void {
     this.placeImages();
+    this.timer();
   }
 
   shufflePuzzleParts() : number[] {
@@ -104,9 +107,25 @@ export class GameComponent implements OnInit {
       if (this.imageArray[i] != i+1)
         return;
     }
+    clearInterval(this.timerInterval);
     setTimeout(function () {
       alert('win');
     }, 500);
+  }
+
+  timer() : void {
+    let minutes = 0;
+    let seconds = 0;
+    this.timerInterval = setInterval(() => {
+      if (seconds == 59) {
+        minutes += 1;
+        seconds = 0;
+      } else {
+        seconds += 1;
+      }
+      this.minutes = ("0" + minutes).slice(-2);
+      this.seconds = ("0" + seconds).slice(-2);
+    }, 1000)
   }
 
 }
