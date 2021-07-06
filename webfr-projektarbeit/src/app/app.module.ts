@@ -27,6 +27,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {MatGridListModule} from '@angular/material/grid-list';
 import {MatExpansionModule} from '@angular/material/expansion'; 
+import {MatDividerModule} from '@angular/material/divider'; 
 
 
 @NgModule({
@@ -57,7 +58,8 @@ import {MatExpansionModule} from '@angular/material/expansion';
     NgbModule,
     MatGridListModule,
     MatTableModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatDividerModule
 
   ],
   providers: [],
