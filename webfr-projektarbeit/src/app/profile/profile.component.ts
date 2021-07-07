@@ -3,8 +3,8 @@ import { HttpClient, HttpHeaders} from '@angular/common/http';
 
 
 export interface ProfileData {
-  email : string,
-  username: string,
+  email : String,
+  username: String,
   highscore : Number,
   company : String,
   street : String,
@@ -29,12 +29,11 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit(): void {
     //hard coded username will be replaced by active user when finished
-    let user = {username : "test0r"}
+    let user = {username : "test0r1"}
 
     this.http.post<{ data: ProfileData}>("http://localhost:3000/profile",user, this.httpOptions).subscribe({
       next: (responseData) => {
         this.profileData = responseData.data
-        console.log(this.profileData)
       },
       error: (err) => {
         // do something with the error

@@ -181,8 +181,6 @@ app.post('/updatehighscore',async function (req, res, next) {
     
     users = await UserData.find({username : req.body.username})
 
-    console.log(users)
-
     score = 100 - parseInt(req.body.mins)*60-parseInt(req.body.seconds)
 
     if(users.length > 0) {
@@ -190,10 +188,8 @@ app.post('/updatehighscore',async function (req, res, next) {
         if(score > users[0].highscore){
 
             users[0].highscore = score
-
             await users[0].save()
         
-            console.log(users[0].username)
 
             res.status(201).json({
                 message : "New Highscore"
