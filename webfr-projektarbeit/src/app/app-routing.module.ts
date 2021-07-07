@@ -6,7 +6,6 @@ import { FaqComponent } from './faq/faq.component';
 import { HighscoreComponent } from './highscore/highscore.component';
 import { ProfileComponent } from './profile/profile.component';
 import { GameComponent } from './game/game.component';
-//import { NavbarComponent } from './navbar/navbar.component';
 
 
 
@@ -16,7 +15,8 @@ const routes: Routes = [
   {path: "sign-up", component: SignUpComponent},
   {path: "faq", component: FaqComponent},
   {path: "highscore", component: HighscoreComponent},
-  {path: "profile", component: ProfileComponent}
+  {path: "profile", component: ProfileComponent},
+  {path:'',redirectTo:'game', pathMatch: 'full' },
 ];
 
 @NgModule({
