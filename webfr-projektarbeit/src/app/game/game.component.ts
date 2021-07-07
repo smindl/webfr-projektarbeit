@@ -138,9 +138,7 @@ export class GameComponent implements OnInit {
     //set variables for http request
     //always logged in with hardcode
     let login = true;
-    let http = this.http;
     var self = this;
-    let httpOptions = this.httpOptions;
 
     clearInterval(this.timerInterval);
     setTimeout(function () {

@@ -23,7 +23,15 @@ export class ProfileComponent implements OnInit {
     headers : new HttpHeaders({ 'Content-Type':'application/json'})
   };
 
-  profileData : ProfileData;
+  profileData : ProfileData = {
+    email : "",
+    username: "",
+    highscore : 0,
+    company : "",
+    street : "",
+    city : "",
+    postcode : 0
+  };
 
   constructor(private http: HttpClient) { }
 
