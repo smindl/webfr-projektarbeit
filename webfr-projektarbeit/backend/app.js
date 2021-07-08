@@ -127,14 +127,19 @@ app.post('/signup',async function (req, res, next) {
     usercheckMail = await UserData.find({email : req.body.email})
     usercheckName = await UserData.find({username : req.body.username})
 
+    let response = 
+    {status : false,
+    username : ""
+    }
+
     if(usercheckMail.length > 0) {
         res.status(200).json({
-            message: "Email already in use"
+            answer: response
         });
     }
     else if(usercheckName.length > 0) {
         res.status(200).json({
-            message: "Username already in use"
+            answer: response
         });
     }
     else {
@@ -147,11 +152,13 @@ app.post('/signup',async function (req, res, next) {
             city :  req.body.city,
             postcode :  req.body.postcode
         });
-        userData.save();
-        console.log("Data saved")
+        await userData.save();
+
+        response.status = true
+        response.username = userData.username
 
         res.status(201).json({
-            message: "New User " + userData.username
+            answer: response
         });
     }
 
@@ -161,17 +168,23 @@ app.post('/login',async function (req, res, next) {
     
     loginData = await UserData.find({email : req.body.email, password : req.body.password})
 
-    let confirm = false
+    let response = 
+    {status : false,
+    username : ""
+    }
     
     if (loginData.length > 0) {
        
+        response.status = true
+        response.username = loginData[0].username
+
         res.status(201).json({
-            confirm : true
+            answer : response
         });
     }
     else {
         res.status(200).json({
-            confirm : false
+            answer : response
         });
     }
 

@@ -2,6 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators, FormBuilder } from '@angular/forms';
 import { HttpClient, HttpHeaders} from '@angular/common/http';
 
+
+export interface signupResponse {
+  username: String,
+  status : Boolean,
+}
+
 @Component({
   selector: 'app-sign-up',
   templateUrl: './sign-up.component.html',
@@ -57,10 +63,19 @@ export class SignUpComponent implements OnInit {
         postcode : this.checkoutForm.controls['PLZ'].value
       }
 
-      this.http.post<{ message: string}>("http://localhost:3000/signup", data, this.httpOptions).subscribe({
+      this.http.post<{ answer: signupResponse}>("http://localhost:3000/signup", data, this.httpOptions).subscribe({
         next: (responseData) => {
-          console.log(responseData.message)
-          alert(responseData.message);
+
+          console.log(responseData.answer.status)
+          console.log(responseData.answer.username)
+
+          if(responseData.answer.status) {
+            alert("Sign-up successfull!")
+            //store session here
+          }
+          else {
+            alert("Email or username already in use")
+          }
         },
         error: (err) => {
           console.log(err)
