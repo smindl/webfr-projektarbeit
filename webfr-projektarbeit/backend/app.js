@@ -82,7 +82,7 @@ app.get('/highscore',async function (req, res, next) {
        i++;
     });
 
-    data.slice(0,9)
+    data = data.slice(0,10)
 
     if(entries.length == 0) {
         data = "No Data"
