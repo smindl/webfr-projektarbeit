@@ -146,7 +146,6 @@ export class GameComponent implements OnInit {
 
     clearInterval(this.timerInterval);
     setTimeout(function () {
-      alert('YOU WIN');
       if (sessionStorage.getItem("login") == "true") {
         let data = {
           username: sessionStorage.getItem("username"),
@@ -162,12 +161,15 @@ export class GameComponent implements OnInit {
           )
           .subscribe({
             next: (responseData) => {
-              console.log(responseData.message);
+              alert(responseData.message);
             },
             error: (err) => {
               // do something with the error
             },
           });
+      }
+      else {
+        alert('YOU WIN');
       }
     }, 500);
   }

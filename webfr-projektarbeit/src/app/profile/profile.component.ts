@@ -36,8 +36,7 @@ export class ProfileComponent implements OnInit {
   constructor(private http: HttpClient) { }
 
   ngOnInit(): void {
-    //hard coded username will be replaced by active user when finished
-    let user = {username : "test0r1"}
+    let user = {username : sessionStorage.getItem("username")}
 
     this.http.post<{ data: ProfileData}>("http://localhost:3000/profile",user, this.httpOptions).subscribe({
       next: (responseData) => {

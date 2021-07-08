@@ -4,7 +4,6 @@ const cors = require("cors");
 const mongoose = require("mongoose");
 
 const UserData = require("./models/user");
-const TestData = require("./models/test");
 
 mongoose.connect("mongodb+srv://Admin:WebFrameworks@webframeworksdb.uur4x.mongodb.net/WebFrameworksDB?retryWrites=true&w=majority")
     .then(() => {
@@ -25,45 +24,6 @@ app.use(urlencoded({
     extended: false
 }));
 
-app.post('/test', function (req, res, next) {
-    
-    const userData = new UserData({
-        username : "Testuser 5",
-        password : "test1234",
-        company : "FHTW",
-        street : "Teststreet",
-        city : "Testcity",
-        postcode : "1234"
-    });
-    userData.save();
-    console.log("Data saved")
-
-    res.status(200).json({
-        message: userData.username
-    });
-
-
-});
-
-app.get('/test',async function (req, res, next) {
-    
-    let entries = await TestData.find()
-    let alltests = ""
-
-    entries.forEach(entrie => {
-        alltests += (entrie.testname + "\n")
-    });
-
-    if(alltests == "") {
-        alltests = "No Tests"
-    }
-
-    res.status(200).json({
-        message : alltests
-    });
-
-
-});
 
 app.get('/highscore',async function (req, res, next) {
     
@@ -148,9 +108,9 @@ app.post('/signup',async function (req, res, next) {
             username :  req.body.username,
             password :  req.body.password,
             company :  req.body.company,
-            street :  req.body.street,
-            city :  req.body.city,
-            postcode :  req.body.postcode
+            street :  req.body.street != "" ? req.body.street : "unknown",
+            city :  req.body.city != "" ? req.body.city : "unknown",
+            postcode :  req.body.postcode != "" ? req.body.postcode : 0000,
         });
         await userData.save();
 
@@ -205,12 +165,12 @@ app.post('/updatehighscore',async function (req, res, next) {
         
 
             res.status(201).json({
-                message : "New Highscore"
+                message : "New Highscore: "+ score
             });
         }
         else {
             res.status(200).json({
-                message : "Better luck next time :("
+                message : "No new hisghscore. Keep trying!"
             });
         }
     }
