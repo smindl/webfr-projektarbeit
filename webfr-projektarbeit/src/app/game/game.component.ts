@@ -128,8 +128,7 @@ export class GameComponent implements OnInit {
   // swap selected pictures and reset selectedImages array
   swapPictures(): void {
     let tmp = this.imageArray[this.selectedImages[0]];
-    this.imageArray[this.selectedImages[0]] =
-      this.imageArray[this.selectedImages[1]];
+    this.imageArray[this.selectedImages[0]] = this.imageArray[this.selectedImages[1]];
     this.imageArray[this.selectedImages[1]] = tmp;
     this.selectedImages[0] = this.selectedImages[1] = -1;
     this.placeImages();
@@ -147,6 +146,7 @@ export class GameComponent implements OnInit {
     clearInterval(this.timerInterval);
     setTimeout(function () {
       alert('YOU WIN');
+      window.location.href="/game";
       if (sessionStorage.getItem("login") == "true") {
         let data = {
           username: sessionStorage.getItem("username"),
