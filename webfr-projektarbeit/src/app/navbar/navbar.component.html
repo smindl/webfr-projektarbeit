@@ -8,12 +8,12 @@
     <div class="collapse navbar-collapse" [ngbCollapse]="navbarCollapsed" id="navbarSupportedContent" style="text-align: center;"> 
         <ul class="navbar-nav">
         <li class ="nav-button"><a id ="game" mat-button color="primary" class="nav-link " routerLink="/game">Game</a></li>
-        <li class ="nav-button" [hidden]="visability"><a id ="login" mat-button color="primary" class="nav-link" routerLink="/login">Login</a></li>
-        <li class ="nav-button" [hidden]="visability"><a id ="sign-up" mat-button color="primary" class="nav-link" routerLink="/sign-up">Sign Up</a></li>
+        <li class ="nav-button"  *ngIf="!userIsLoggedIn()"><a id ="login" mat-button color="primary" class="nav-link" routerLink="/login">Login</a></li>
+        <li class ="nav-button"  *ngIf="!userIsLoggedIn()"><a id ="sign-up" mat-button color="primary" class="nav-link" routerLink="/sign-up">Sign Up</a></li>
         <li class ="nav-button"><a id ="highscore" mat-button color="primary" class="nav-link" routerLink="/highscore">Highscore</a></li>
-        <li class ="nav-button" [hidden]="!visability"><a id ="profile" mat-button color="primary" class="nav-link" routerLink="/profile">My Profile</a></li>
+        <li class ="nav-button"  *ngIf="userIsLoggedIn()"><a id ="profile" mat-button color="primary" class="nav-link" routerLink="/profile">My Profile</a></li>
         <li class ="nav-button"><a id ="faq" mat-button color="primary" class="nav-link" routerLink="/faq">FAQ</a></li>
-        <li class ="nav-button" [hidden]="!visability"><a mat-button color="primary" class="nav-link" id="logout">Logout</a></li>
+        <li class ="nav-button"  *ngIf="userIsLoggedIn()"><a mat-button color="primary" class="nav-link" ng-click="logout()">Logout</a></li>
       </ul>
     </div>
   </nav>
