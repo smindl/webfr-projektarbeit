@@ -17,7 +17,7 @@ export class NavbarComponent implements OnInit {
   }
 
   userIsLoggedIn() : boolean {
-    //document.getElementById("logout")?.addEventListener("click", this.logout); 
+    document.getElementById("logout")?.addEventListener("click", this.logout); 
     return sessionStorage.getItem("login") == "true" ? true : false;
   }
   
