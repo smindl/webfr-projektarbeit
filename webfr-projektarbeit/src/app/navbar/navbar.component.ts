@@ -11,12 +11,13 @@ export class NavbarComponent implements OnInit {
   visability = sessionStorage.getItem('login')
 
   constructor() { }
-  
- 
-  ngOnInit(): void {
 
-    
+  logout() : void {
+    sessionStorage.clear();
+  }
   
+  ngOnInit(): void {
+    document.getElementById("logout")?.addEventListener("click", this.logout);  
   }
 
 }

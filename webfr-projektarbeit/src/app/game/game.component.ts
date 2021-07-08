@@ -142,17 +142,12 @@ export class GameComponent implements OnInit {
       if (this.imageArray[i] != i + 1) return;
     }
 
-    //set variables for http request
-    //always logged in with hardcode
-    let login = true;
     var self = this;
 
     clearInterval(this.timerInterval);
     setTimeout(function () {
       alert('YOU WIN');
-      if (login) {
-        //setup data for request
-        //hardcoded user should be from login(session?) when finished
+      if (sessionStorage.getItem("login") == "true") {
         let data = {
           username: sessionStorage.getItem("username"),
           seconds: self.seconds,
