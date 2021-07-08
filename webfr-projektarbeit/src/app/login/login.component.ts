@@ -64,8 +64,7 @@ export class LoginComponent implements OnInit {
         if(responseData.answer.status) {
           alert("Login successfull!")
           sessionStorage.setItem("login", "true");
-          //sessionStorage.setItem("username", "")
-          //store session here
+          sessionStorage.setItem("username", String(responseData.answer.username));
         }
         else {
           alert("Email or password incorrect")

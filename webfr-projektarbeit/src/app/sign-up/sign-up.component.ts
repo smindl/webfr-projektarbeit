@@ -71,7 +71,8 @@ export class SignUpComponent implements OnInit {
 
           if(responseData.answer.status) {
             alert("Sign-up successfull!")
-            //store session here
+            sessionStorage.setItem("login", "true");
+            sessionStorage.setItem("username", String(responseData.answer.username));
           }
           else {
             alert("Email or username already in use")
