@@ -2,6 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import {FormControl, Validators} from '@angular/forms';
 import { HttpClient, HttpHeaders} from '@angular/common/http';
 
+export interface loginResponse {
+  username: String,
+  status : Boolean,
+}
+
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -49,15 +55,15 @@ export class LoginComponent implements OnInit {
       password : this.pw.value
     }
 
-    this.http.post<{ confirm: boolean}>("http://localhost:3000/login",user, this.httpOptions).subscribe({
+    this.http.post<{ answer: loginResponse}>("http://localhost:3000/login",user, this.httpOptions).subscribe({
       next: (responseData) => {
   
-        console.log(responseData.confirm)
-        //response Data.confirm is true upon successfull login, false otherwise
-        //code after successfull login is still missing
+        console.log(responseData.answer.status)
+        console.log(responseData.answer.username)
 
-        if(responseData.confirm) {
+        if(responseData.answer.status) {
           alert("Login successfull!")
+          //store session here
         }
         else {
           alert("Email or password incorrect")
