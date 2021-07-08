@@ -57,6 +57,8 @@ export class LoginComponent implements OnInit {
         //code after successfull login is still missing
 
         if(responseData.confirm) {
+          sessionStorage.setItem("login", "true");
+          //sessionStorage.setItem("username", "")
           alert("Login successfull!")
         }
         else {

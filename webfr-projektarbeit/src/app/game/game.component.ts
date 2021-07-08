@@ -7,6 +7,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
   styleUrls: ['./game.component.sass'],
 })
 export class GameComponent implements OnInit {
+
   imageArray: number[];
   selectedImages: number[];
   minutes: string;
@@ -26,39 +27,42 @@ export class GameComponent implements OnInit {
     this.choosePuzzle();
   }
 
-  startPuzzle(): void {
-    document.getElementById("choose")!.remove();
-    this.imageArray = this.shufflePuzzleParts();
-    this.placeImages();
-    this.timer();
-  }
-
+  // create menu for puzzle choice
   choosePuzzle(): void {
-    let that = this;
+    let that = this; // make 'this' available in onclick functions
 
     let puzzle1 = document.getElementById('puzzle1');
-    //puzzle1!.textContent = "PUZZLE 1";
     puzzle1?.addEventListener('click', function () {
       that.chosenPuzzle = 'puzzle1';
       that.startPuzzle();
     });
+    
     let img1 = document.createElement('img');
     img1.setAttribute('id', 'img1');
     img1.setAttribute('src', 'assets/img/puzzle1.png');
     puzzle1?.appendChild(img1);
 
     let puzzle2 = document.getElementById('puzzle2');
-    //puzzle2!.textContent = "PUZZLE 2";
     puzzle2?.addEventListener('click', function () {
       that.chosenPuzzle = 'puzzle2';
       that.startPuzzle();
     });
+
     let img2 = document.createElement('img');
     img2.setAttribute('id', 'img2');
     img2.setAttribute('src', 'assets/img/puzzle2.png');
     puzzle2?.appendChild(img2);
   }
 
+  startPuzzle(): void {
+    document.getElementById("choosePuzzle")!.remove();
+    this.imageArray = this.shufflePuzzleParts();
+    this.placeImages();
+    this.timer();
+    this.checkWin(); // detect random win
+  }
+
+  // given function
   shufflePuzzleParts(): number[] {
     const puzzleParts = [1, 2, 3, 4, 5, 6, 7, 8, 9];
     let counter = puzzleParts.length;
@@ -72,11 +76,11 @@ export class GameComponent implements OnInit {
     return puzzleParts;
   }
 
+  // this function is called throughout the entire game
   placeImages(): void {
     const puzzle = document.getElementById('puzzle');
-    document.getElementById('img1')?.remove();
-    document.getElementById('img2')?.remove();
 
+    // overwrite current puzzle pictures
     if (puzzle?.firstChild) {
       puzzle.removeChild(puzzle.firstChild);
     }
@@ -101,7 +105,7 @@ export class GameComponent implements OnInit {
       img.setAttribute('src', imgSrc);
       img.setAttribute('id', String(this.imageArray[i]));
       img.setAttribute('pos', String(i));
-      let that = this; //ugly as hell
+      let that = this; 
       img.addEventListener('click', function () {
         img.setAttribute('style', 'border-style:solid;');
         that.select(i);
@@ -112,6 +116,7 @@ export class GameComponent implements OnInit {
     }
   }
 
+  // save selected pictures in array to swap
   select(i: number): void {
     if (this.selectedImages[0] == -1) this.selectedImages[0] = i;
     else if (this.selectedImages[1] == -1) {
@@ -120,6 +125,7 @@ export class GameComponent implements OnInit {
     }
   }
 
+  // swap selected pictures and reset selectedImages array
   swapPictures(): void {
     let tmp = this.imageArray[this.selectedImages[0]];
     this.imageArray[this.selectedImages[0]] =
@@ -130,6 +136,7 @@ export class GameComponent implements OnInit {
     this.checkWin();
   }
 
+  // checks if image id's and locations match
   checkWin(): void {
     for (let i = 0; i < this.imageArray.length; i++) {
       if (this.imageArray[i] != i + 1) return;
@@ -142,12 +149,12 @@ export class GameComponent implements OnInit {
 
     clearInterval(this.timerInterval);
     setTimeout(function () {
-      alert('win');
+      alert('YOU WIN');
       if (login) {
         //setup data for request
         //hardcoded user should be from login(session?) when finished
         let data = {
-          username: 'test0r1',
+          username: sessionStorage.getItem("username"),
           seconds: self.seconds,
           mins: self.minutes,
         };
@@ -170,6 +177,7 @@ export class GameComponent implements OnInit {
     }, 500);
   }
 
+  // timer is invoked every second and updates time on html page
   timer(): void {
     clearInterval(this.timerInterval);
     let timerText = document.getElementById('timer');
