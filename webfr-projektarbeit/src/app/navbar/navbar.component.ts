@@ -9,12 +9,13 @@ export class NavbarComponent implements OnInit {
   public navbarCollapsed = true;
 
   constructor() { }
-  
- 
-  ngOnInit(): void {
 
-    
+  logout() : void {
+    sessionStorage.clear();
+  }
   
+  ngOnInit(): void {
+    document.getElementById("logout")?.addEventListener("click", this.logout);  
   }
 
 }
