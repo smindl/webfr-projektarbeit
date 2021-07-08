@@ -128,8 +128,7 @@ export class GameComponent implements OnInit {
   // swap selected pictures and reset selectedImages array
   swapPictures(): void {
     let tmp = this.imageArray[this.selectedImages[0]];
-    this.imageArray[this.selectedImages[0]] =
-      this.imageArray[this.selectedImages[1]];
+    this.imageArray[this.selectedImages[0]] = this.imageArray[this.selectedImages[1]];
     this.imageArray[this.selectedImages[1]] = tmp;
     this.selectedImages[0] = this.selectedImages[1] = -1;
     this.placeImages();
@@ -162,6 +161,7 @@ export class GameComponent implements OnInit {
           .subscribe({
             next: (responseData) => {
               alert(responseData.message);
+              window.location.href="/game";
             },
             error: (err) => {
               // do something with the error
@@ -170,6 +170,7 @@ export class GameComponent implements OnInit {
       }
       else {
         alert('YOU WIN');
+        window.location.href="/game";
       }
     }, 500);
   }
