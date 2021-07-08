@@ -58,9 +58,6 @@ export class LoginComponent implements OnInit {
     this.http.post<{ answer: loginResponse}>("http://localhost:3000/login",user, this.httpOptions).subscribe({
       next: (responseData) => {
   
-        console.log(responseData.answer.status)
-        console.log(responseData.answer.username)
-
         if(responseData.answer.status) {
           alert("Login successfull!")
           sessionStorage.setItem("login", "true");

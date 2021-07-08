@@ -66,9 +66,6 @@ export class SignUpComponent implements OnInit {
       this.http.post<{ answer: signupResponse}>("http://localhost:3000/signup", data, this.httpOptions).subscribe({
         next: (responseData) => {
 
-          console.log(responseData.answer.status)
-          console.log(responseData.answer.username)
-
           if(responseData.answer.status) {
             alert("Sign-up successfull!")
             sessionStorage.setItem("login", "true");
