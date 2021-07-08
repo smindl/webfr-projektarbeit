@@ -43,7 +43,7 @@ export class ProfileComponent implements OnInit {
         this.profileData = responseData.data
       },
       error: (err) => {
-        // do something with the error
+        console.log(err);
       },
     });
     

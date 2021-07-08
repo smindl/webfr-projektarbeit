@@ -164,7 +164,7 @@ export class GameComponent implements OnInit {
               window.location.href="/game";
             },
             error: (err) => {
-              // do something with the error
+              console.log(err)
             },
           });
       }

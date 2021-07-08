@@ -44,10 +44,9 @@ export class HighscoreComponent implements OnInit {
       next: (responseData) => {
         this.src = responseData.data
         this.table.renderRows();
-        // do something
       },
       error: (err) => {
-        // do something with the error
+        console.log(err)
       },
     });
 
