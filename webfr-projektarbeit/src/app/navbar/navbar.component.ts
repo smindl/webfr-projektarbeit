@@ -14,6 +14,7 @@ export class NavbarComponent implements OnInit {
 
   logout() : void {
     sessionStorage.clear();
+    window.location.href="/login";
   }
 
   userIsLoggedIn() : boolean {

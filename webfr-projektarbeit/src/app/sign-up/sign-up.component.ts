@@ -73,6 +73,7 @@ export class SignUpComponent implements OnInit {
             alert("Sign-up successfull!")
             sessionStorage.setItem("login", "true");
             sessionStorage.setItem("username", String(responseData.answer.username));
+            window.location.href="/game";
           }
           else {
             alert("Email or username already in use")

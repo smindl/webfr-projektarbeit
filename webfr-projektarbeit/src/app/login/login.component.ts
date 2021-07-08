@@ -65,6 +65,7 @@ export class LoginComponent implements OnInit {
           alert("Login successfull!")
           sessionStorage.setItem("login", "true");
           sessionStorage.setItem("username", String(responseData.answer.username));
+          window.location.href="/game";
         }
         else {
           alert("Email or password incorrect")
